@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tina’s Dream Woven</title>
+    <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/auth.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-light p-10">
+
+<h1 class="text-4xl font-serif text-dark mb-6">
+  Tu espacio creativo
+</h1>
+
+<button onclick="logout()"
+  class="bg-dark text-white px-6 py-2 rounded-full">
+  Cerrar sesión
+</button>
+
+<script>
+  if (!localStorage.getItem("session")) {
+    window.location.href = "../login.html";
+  }
+
+  function logout() {
+    localStorage.removeItem("session");
+    window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="scripts/perfil.js"></script>
+
+</body>
+</html>

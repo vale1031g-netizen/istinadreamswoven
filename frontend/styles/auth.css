@@ -1,0 +1,70 @@
+/* Fondo */
+.auth-bg {
+    background: linear-gradient(135deg, #F3E5F5, #E2C7FF);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Tarjeta tipo glass */
+.glass-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Inputs */
+.input-field {
+    background-color: #F8F5FC;
+    border: 1px solid #D1C4E9;
+    color: #4A148C;
+    padding-left: 2.8rem; /* espacio para el icono */
+    font-size: 0.95rem;
+}
+
+.input-field::placeholder {
+    color: #8E80B0;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #9575CD;
+    box-shadow: 0 0 0 2px rgba(149, 117, 205, 0.4);
+    background-color: #ffffff;
+}
+
+/* Iconos dentro del input */
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #9575CD;
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+/* Botón ojo */
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: #9575CD;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.toggle-password i {
+    font-size: 1rem;
+}
+
+/* Botón principal */
+.auth-btn {
+    background-color: #B399D4;
+    transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+    background-color: #9575CD;
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tina’s Dream Woven</title>
+
+  <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#B399D4',
+            secondary: '#E2C7FF',
+            accent: '#9575CD',
+            light: '#F3E5F5',
+            dark: '#4A148C'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-light text-gray-800">
+
+<header class="bg-white shadow fixed w-full z-50">
+  <nav class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <i class="fas fa-heart text-accent text-xl"></i>
+      <span class="font-serif text-xl text-dark">Tina’s Dream Woven</span>
+    </div>
+  </nav>
+</header>
+
+<section class="pt-28 pb-20">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+
+    <div>
+      <h1 class="font-serif text-4xl text-dark mb-4 leading-tight">
+        Diseña, aprende y vende<br> crochet sin límites
+      </h1>
+
+      <p class="text-base text-gray-700 mb-6">
+        Una plataforma para compartir patrones, vender creaciones,
+        aprender con tutoriales y crecer en comunidad.
+      </p>
+
+      <div class="flex gap-4">
+        <a href="login.html" class="bg-dark text-white px-6 py-3 rounded-full text-sm hover:bg-accent transition"> Ingresar </a>
+        <a href="registro.html" class="border border-dark px-6 py-3 rounded-full text-sm hover:bg-dark hover:text-white transition"> Crear cuenta </a>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <img src="assets/icons/logo-1-primary.png" class="rounded-xl shadow-lg max-h-80 object-cover" alt="Crochet creativo">
+    </div>
+
+  </div>
+</section>
+
+<section id="explorar" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <h2 class="text-3xl font-serif text-center text-dark mb-10">
+      Todo en un solo lugar
+    </h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+      <div class="bg-light p-6 rounded-xl shadow-sm text-center">
+        <i class="fas fa-shopping-bag text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Productos</h3>
+        <p class="text-sm text-gray-600">Vende y compra creaciones.</p>
+      </div>
+
+      <div class="bg-light p-6 rounded-xl shadow-sm text-center">
+        <i class="fas fa-file-pdf text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Patrones</h3>
+        <p class="text-sm text-gray-600">Comparte o descarga.</p>
+      </div>
+
+      <div class="bg-light p-6 rounded-xl shadow-sm text-center">
+        <i class="fas fa-video text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Tutoriales</h3>
+        <p class="text-sm text-gray-600">Aprende paso a paso.</p>
+      </div>
+
+      <div class="bg-light p-6 rounded-xl shadow-sm text-center">
+        <i class="fas fa-users text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Comunidad</h3>
+        <p class="text-sm text-gray-600">Grupos, chat y apoyo.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-6 bg-white rounded-xl shadow p-10 text-center">
+    <h2 class="font-serif text-3xl text-dark mb-4">
+      Hecho por y para tejedores
+    </h2>
+    <p class="text-gray-700 mb-6">
+      Comparte tus proyectos, participa en grupos,
+      recibe retroalimentación y crece con otros creadores.
+    </p>
+    <a href="registro.html" class="bg-primary text-white px-7 py-3 rounded-full text-sm hover:bg-accent transition"> Unirme a la comunidad </a>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-400 text-sm">
+  <div class="max-w-7xl mx-auto px-6 py-10 text-center space-y-6">
+
+    <div class="flex justify-center items-center gap-2 text-white">
+      <i class="fas fa-heart text-primary"></i>
+      <span class="font-serif text-lg">Tina’s Dream Woven</span>
+    </div>
+
+    <div class="flex justify-center gap-6 text-lg">
+      <a href="https://www.facebook.com/share/1F2anX3DBu/" class="hover:text-primary"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/is_tina.dw?utm_source=qr&igsh=cDVqbm92NmRzZXZm" class="hover:text-primary"><i class="fab fa-instagram"></i></a>
+      <a href="https://pin.it/3pRuGKdTg" class="hover:text-primary"><i class="fab fa-pinterest-p"></i></a>
+      <a href="https://youtube.com/@tinasdreamswoven?si=O9hr-Ww_mp116QtS" class="hover:text-primary"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="border-t border-gray-800 pt-4">
+      © 2025 Tina’s Dream Woven · Todos los derechos reservados
+    </div>
+
+  </div>
+</footer>
+
+<script src="scripts/session.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad | Tina’s Dream Woven</title>
+
+  <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#B399D4',
+            accent: '#9575CD',
+            light: '#F3E5F5',
+            dark: '#4A148C'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen">
+
+<header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-heart text-accent text-2xl"></i>
+            <a href="#" class="text-lg font-serif font-bold">Tina's Dreams Woven - Comunidad</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="inicio.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Inicio</a>
+            <a href="perfil.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Perfil</a>
+            <button id="logoutBtn" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Cerrar sesión</button>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6 grid md:grid-cols-3 gap-6">
+
+  <!-- Grupos -->
+  <aside class="bg-white rounded-xl p-4 shadow space-y-4">
+    <h2 class="font-semibold">Grupos</h2>
+
+    <div class="flex gap-2">
+      <input id="groupName" class="flex-1 border px-3 py-2 rounded" placeholder="Nuevo grupo">
+      <button id="createGroup" class="bg-primary text-white px-3 rounded">Crear</button>
+    </div>
+
+    <ul id="groupList" class="space-y-2"></ul>
+  </aside>
+
+  <!-- Chat -->
+  <section class="bg-white rounded-xl p-4 shadow md:col-span-2 flex flex-col h-[70vh]">
+
+    <div id="chatHeader" class="font-semibold border-b pb-2 mb-2">
+      Selecciona un grupo
+    </div>
+
+    <div id="chatMessages" class="flex-1 overflow-y-auto space-y-3 mb-3"></div>
+
+    <div class="flex items-center gap-2 border-t pt-3">
+      <input type="file" id="imageInput" accept="image/*" class="text-sm">
+      <input id="chatInput" class="flex-1 border px-4 py-2 rounded" placeholder="Escribe un mensaje">
+      <button id="sendBtn" class="bg-primary text-white px-4 py-2 rounded">Enviar</button>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="scripts/comunidad.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tina’s Dream Woven</title>
+    <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/auth.css">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#B399D4',
+                    secondary: '#E2C7FF',
+                    accent: '#9575CD',
+                    light: '#F3E5F5',
+                    dark: '#4A148C',
+                },
+                fontFamily: {
+                    sans: ['Poppins', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif'],
+                },
+            },
+        }
+    };
+        
+</script>
+</head>
+
+<body class="auth-bg min-h-screen flex items-center justify-center p-4">
+    
+    <div class="w-full max-w-md">
+
+    <a href="index.html" class="inline-flex items-center mb-4 text-accent hover:text-dark transition">
+      <i class="fas fa-arrow-left mr-2"></i> Volver a inicio </a>
+
+<div class="glass-card w-full max-w-md p-8 text-center">
+
+  <i class="fas fa-key text-accent text-4xl mb-4"></i>
+  <h1 class="font-serif text-2xl text-dark mb-2">Recuperar contraseña</h1>
+  <p class="text-gray-600 mb-6"> Te enviaremos un enlace para restablecerla </p>
+
+  <form id="recoveryForm" class="space-y-4">
+    <input type="email" placeholder="Correo electrónico" required
+      class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-accent">
+
+    <button class="w-full auth-btn text-white py-3 rounded-full font-semibold"> Enviar enlace </button>
+  </form>
+
+  <a href="login.html" class="block mt-4 text-accent text-sm"> Volver al inicio de sesión </a>
+
+</div>
+
+<script src="scripts/recuperarcontraseña.js"></script>
+</body>

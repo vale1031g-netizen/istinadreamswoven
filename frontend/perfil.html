@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tina’s Dream Woven</title>
+    <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/auth.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B399D4',
+                        secondary: '#E2C7FF',
+                        accent: '#9575CD',
+                        light: '#F3E5F5',
+                        dark: '#4A148C',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                },
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen">
+
+<header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-heart text-accent text-2xl"></i>
+            <a href="#" class="text-lg font-serif font-bold">Tina's Dreams Woven</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="inicio.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Inicio</a>
+            <button id="logoutBtn" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Cerrar sesión</button>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto p-6">
+    
+    <section class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-3 gap-6 items-start">
+        <div class="space-y-6 md:col-span-1">
+        <div class="avatar-blob p-4 flex flex-col items-center">
+            <div class="w-36 h-36 rounded-full overflow-hidden shadow">
+            <img src="assets/icons/logo-icon.png" alt="Avatar del Usuario">
+        </div>
+        <h2 id="displayName" class="mt-4 text-2xl font-semibold font-serif">Usuario</h2>
+        <p id="displayRole" class="text-sm text-gray-600">Miembro · Comunidad Tejedora</p>
+        <div class="mt-4 flex gap-3">
+            <button id="openEditBtn" class="bg-primary text-white px-4 py-2 rounded-full hover:bg-accent transition">
+            <i class="fas fa-user-edit mr-2"></i>Editar perfil
+            </button>
+            <a href="comunidad.html" class="bg-secondary text-dark px-4 py-2 rounded-full hover:bg-accent transition">
+            <i class="fas fa-users mr-2"></i>Comunidad </a>
+        </div>
+    </div>
+
+            <div class="bg-light rounded-lg p-4 text-center">
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <div class="text-xl font-bold" id="statProducts">0</div>
+                        <div class="text-xs text-gray-600">Productos</div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold" id="statPatterns">0</div>
+                        <div class="text-xs text-gray-600">Patrones</div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold" id="statFollowers">0</div>
+                        <div class="text-xs text-gray-600">Seguidores</div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="space-y-2">
+                <a href="verpatrones.html" class="block text-sm px-3 py-2 rounded hover:bg-white/60">Ver patrones</a>
+                <a href="vertutoriales.html" class="block text-sm px-3 py-2 rounded hover:bg-white/60">Ver tutoriales</a>
+                <a href="verproductos.html" class="block text-sm px-3 py-2 rounded hover:bg-white/60">Ver productos</a>
+                <a href="verfavoritos.html" class="block text-sm px-3 py-2 rounded hover:bg-white/60">Ver favoritos</a>
+                <a href="verpedidos.html" class="block text-sm px-3 py-2 rounded hover:bg-white/60">Ver pedidos</a>
+            </nav>
+        </div>
+
+        <div class="md:col-span-2">
+            <div class="flex justify-between mb-4">
+                <div>
+                    <h3 class="text-xl font-semibold">Perfil</h3>
+                    <p class="text-sm text-gray-500">Información pública y actividad reciente</p>
+                </div>
+                <span class="text-sm text-gray-400">Si tienes un sueño, ¡te ayudamos a tejerlo!</span>
+            </div>
+
+            <div class="mb-6">
+                <div id="tabs" class="flex flex-wrap gap-2 border-b pb-3">
+                    <button data-tab="resumen" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm active">Resumen</button>
+                    <button data-tab="patrones" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm">Patrones</button>
+                    <button data-tab="tutoriales" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm">Tutoriales</button>
+                    <button data-tab="productos" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm">Productos</button>
+                    <button data-tab="pedidos" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm">Pedidos</button>
+                    <button data-tab="balance" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm">Balance</button>
+                    <button data-tab="ajustes" class="tab-btn px-4 py-2 rounded-t-lg bg-white text-dark shadow-sm">Ajustes</button>
+                </div>
+
+                <data class="mt-6">
+
+                    <div class="tab-content" data-content="resumen">
+                        <p id="bio" class="text-gray-700"></p>
+                    </div>
+                    
+                    <div class="tab-content hidden" data-content="patrones">
+                        <form id="patronForm" class="bg-light p-6 rounded-2xl space-y-5 shadow-sm">
+                            <h4 class="text-lg font-semibold text-dark">Subir nuevo patrón</h4>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nombre del patrón</label>
+                                <input
+                                    id="patronName"
+                                    type="text"
+                                    placeholder="Ej: Bolso tejido primavera"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                    required
+                                >
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Descripción</label>
+                                <input
+                                    id="patronDescripcion"
+                                    type="text"
+                                    placeholder="Breve descripción del patrón"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                    required
+                                >
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Tipo de patrón</label>
+                                <select
+                                    id="patronTipo"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                >
+                                    <option value="Tapestry">Tapestry</option>
+                                    <option value="Prenda">Prenda</option>
+                                    <option value="Amigurumi">Amigurumi</option>
+                                </select>
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Precio (COP)</label>
+                                <input
+                                    id="patronPrecio"
+                                    type="number"
+                                    min="0"
+                                    step="500"
+                                    placeholder="Ej: 15000"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                    required
+                                >
+                                <p class="text-xs text-gray-500 mt-1">Pesos colombianos</p>
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Archivo del patrón</label>
+                                <input
+                                    id="patronFile"
+                                    type="file"
+                                    class="w-full text-sm"
+                                    required
+                                >
+                                </div>
+
+                                <button
+                                type="submit"
+                                class="btn-primary w-full py-3 text-sm font-medium"
+                                >
+                                Guardar patrón
+                                </button>
+                                
+
+                            </form>
+                            </div>
+                            <div class="tab-content hidden" data-content="tutoriales">
+                            <form id="tutorialForm" class="bg-light p-6 rounded-2xl space-y-5 shadow-sm">
+
+                                <h4 class="text-lg font-semibold text-dark">Subir nuevo tutorial</h4>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Nombre del tutorial</label>
+                                <input
+                                    id="tutorialName"
+                                    type="text"
+                                    placeholder="Ej: Aprende puntos básicos"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                    required
+                                >
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Descripción</label>
+                                <input
+                                    id="tutorialDescripcion"
+                                    type="text"
+                                    placeholder="Descripción breve del tutorial"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                    required
+                                >
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Precio (COP)</label>
+                                <input
+                                    id="tutorialPrecio"
+                                    type="number"
+                                    min="0"
+                                    step="500"
+                                    placeholder="Ej: 20000"
+                                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                    required
+                                >
+                                <p class="text-xs text-gray-500 mt-1">Pesos colombianos</p>
+                                </div>
+
+                                <div>
+                                <label class="block text-sm font-medium mb-1">Archivo del tutorial</label>
+                                <input
+                                    id="tutorialFile"
+                                    type="file"
+                                    class="w-full text-sm"
+                                    required
+                                >
+                                </div>
+
+                                <button
+                                type="submit"
+                                class="btn-primary w-full py-3 text-sm font-medium"
+                                >
+                                Guardar tutorial
+                                </button>
+                            </form>
+                            </div>
+
+                            <div class="tab-content hidden" data-content="productos">
+                                <form id="productoForm" class="bg-light p-6 rounded-2xl space-y-5 shadow-sm">
+                                    <h4 class="text-lg font-semibold text-dark">Subir nuevo producto</h4>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Nombre del producto</label>
+                                        <input
+                                            id="productoName"
+                                            type="text"
+                                            class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                            required
+                                        >
+                                        </div>
+
+                                        <div>
+                                        <label class="block text-sm font-medium mb-1">Descripción</label>
+                                        <input
+                                            id="productoDescripcion"
+                                            type="text"
+                                            class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                            required
+                                        >
+                                        </div>
+
+                                        <div>
+                                        <label class="block text-sm font-medium mb-1">Categoría</label>
+                                        <select
+                                            id="productoCategoria"
+                                            class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                        >
+                                            <option>Bolsos</option>
+                                            <option>Accesorios</option>
+                                            <option>Ropa</option>
+                                            <option>Decoración</option>
+                                        </select>
+                                        </div>
+
+                                        <div>
+                                        <label class="block text-sm font-medium mb-1">Precio (COP)</label>
+                                        <input
+                                            id="productoPrecio"
+                                            type="number"
+                                            min="0"
+                                            step="500"
+                                            class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                            required
+                                        >
+                                        </div>
+
+                                        <div>
+                                        <label class="block text-sm font-medium mb-1">Cantidad disponible</label>
+                                        <input
+                                            id="productoStock"
+                                            type="number"
+                                            min="1"
+                                            class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary"
+                                            required
+                                        >
+                                        </div>
+
+                                        <div>
+                                        <label class="block text-sm font-medium mb-1">Imagen del producto</label>
+                                        <input
+                                            id="productoImagen"
+                                            type="file"
+                                            accept="image/*"
+                                            class="w-full text-sm"
+                                            required
+                                        >
+                                        </div>
+
+                                        <button type="submit" class="btn-primary w-full py-3">
+                                        Guardar producto
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                                <div class="tab-content hidden" data-content="pedidos">
+                                    <p class="text-gray-500">No has realizado pedidos todavía.</p>
+                                </div>
+
+                        <div class="tab-content hidden" data-content="balance">
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="text-sm text-gray-500">Ganancias</div>
+                                            <div class="text-lg font-bold">$0</div>
+                                        </div>
+                                        <i class="fas fa-wallet text-2xl text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div class="text-sm text-gray-500">Pendiente de envío</div>
+                                    <div class="text-lg font-bold">0 pedidos</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div class="text-sm text-gray-500">Favoritos</div>
+                                    <div class="text-lg font-bold">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content hidden" data-content="ajustes">
+                            <h4 class="font-semibold mb-4">Ajustes de la cuenta</h4>
+                            <form id="settingsForm" class="space-y-4 bg-white p-4 rounded-lg shadow-sm">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="text-sm font-medium">Nombre completo</label>
+                                        <input type="text" id="nameInput" class="mt-1 block w-full border rounded px-3 py-2" value="valentina gonzález">
+                                    </div>
+                                    <div>
+                                        <label class="text-sm font-medium">Nombre de usuario</label>
+                                        <input type="text" id="usernameInput" class="mt-1 block w-full border rounded px-3 py-2" value="valentina_g">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium">Email</label>
+                                    <input type="email" id="emailInput" class="mt-1 block w-full border rounded px-3 py-2" value="valentina@example.com">
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="text-sm font-medium">País</label>
+                                        <input type="text" id="countryInput" class="mt-1 block w-full border rounded px-3 py-2" value="Colombia">
+                                    </div>
+                                    <div>
+                                        <label class="text-sm font-medium">Idioma</label>
+                                        <select id="languageSelect" class="mt-1 block w-full border rounded px-3 py-2">
+                                            <option value="es">Español</option>
+                                            <option value="en">English</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" id="newsletter" checked>
+                                    <label for="newsletter" class="text-sm">Recibir noticias y promociones</label>
+                                </div>
+                                <div class="flex justify-end gap-3">
+                                    <button type="button" id="cancelSettings" class="px-4 py-2 border rounded">Cancelar</button>
+                                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-accent">Guardar cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div id="editModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center">
+            <div class="bg-white p-6 rounded-lg w-full max-w-lg">
+                <h3 class="font-semibold mb-4">Editar perfil</h3>
+                <form id="editProfileForm" class="space-y-4">
+                    <input id="fullName" placeholder="Nombre completo" class="w-full border px-3 py-2 rounded">
+                    <textarea id="bioInput" placeholder="Biografía" class="w-full border px-3 py-2 rounded"></textarea>
+                    <button class="bg-primary text-white px-4 py-2 rounded">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+<script type="module" src="scripts/perfil.js"></script>
+<script type="module" src="scripts/session.js"></script>
+<script type="module" src="scripts/utils.js"></script>
+</body>
+</html>

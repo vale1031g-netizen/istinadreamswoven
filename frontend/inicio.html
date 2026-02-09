@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad | Tina’s Dream Woven</title>
+
+  <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#B399D4',
+            accent: '#9575CD',
+            light: '#F3E5F5',
+            dark: '#4A148C'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen">
+
+<header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-heart text-accent text-2xl"></i>
+            <a href="#" class="text-lg font-serif font-bold">Tina's Dreams Woven</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="inicio.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Inicio</a>
+            <a href="perfil.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Perfil</a>
+            <button id="logoutBtn" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Cerrar sesión</button>
+        </div>
+    </div>
+</header>
+
+<section class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-serif text-3xl text-center mb-10">
+      Explorar contenido
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+      <div class="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition">
+        <i class="fas fa-box-open text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Tienda</h3>
+        <p class="text-sm text-gray-600 mb-3"> Compra y vende piezas tejidas. </p>
+        <a href="verproductos.html" class="text-sm text-primary hover:underline"> Ver productos </a>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition">
+        <i class="fas fa-file-pdf text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Patrones</h3>
+        <p class="text-sm text-gray-600 mb-3"> Comparte y descarga patrones. </p>
+        <a href="verpatrones.html" class="text-sm text-primary hover:underline"> Ver patrones </a>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition">
+        <i class="fas fa-video text-3xl text-accent mb-3"></i>
+        <h3 class="font-medium mb-1">Tutoriales</h3>
+        <p class="text-sm text-gray-600 mb-3"> Aprende paso a paso. </p>
+        <a href="vertutoriales.html" class="text-sm text-primary hover:underline"> Ver tutoriales </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <h2 class="font-serif text-3xl mb-4"> Comunidad </h2>
+    <p class="text-gray-600 mb-8"> Grupos, mensajes, imágenes y conexión en tiempo real. </p>
+
+    <a href="comunidad.html" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full hover:bg-accent transition">
+      <i class="fas fa-users"></i> Entrar a la comunidad </a>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-400 text-sm">
+  <div class="max-w-7xl mx-auto px-6 py-10 text-center space-y-6">
+
+    <div class="flex justify-center items-center gap-2 text-white">
+      <i class="fas fa-heart text-primary"></i>
+      <span class="font-serif text-lg">Tina’s Dream Woven</span>
+    </div>
+
+    <div class="flex justify-center gap-6 text-lg">
+      <a href="https://www.facebook.com/share/1F2anX3DBu/" class="hover:text-primary"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/is_tina.dw/" class="hover:text-primary"><i class="fab fa-instagram"></i></a>
+      <a href="https://pin.it/3pRuGKdTg" class="hover:text-primary"><i class="fab fa-pinterest-p"></i></a>
+      <a href="https://youtube.com/@tinasdreamswoven" class="hover:text-primary"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="border-t border-gray-800 pt-4">
+      © 2025 Tina’s Dream Woven · Todos los derechos reservados
+    </div>
+
+  </div>
+</footer>
+
+<script src="scripts/session.js"></script>
+<script type="module" src="scripts/session.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registro - Tina's Dream Woven</title>
+        <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/auth.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B399D4',
+                        secondary: '#E2C7FF',
+                        accent: '#9575CD',
+                        light: '#F3E5F5',
+                        dark: '#4A148C',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                },
+            },
+            };
+            </script>
+            </head>
+
+<body class="auth-bg min-h-screen flex items-center justify-center p-4">
+
+<div class="w-full max-w-md">
+    <a href="index.html" class="inline-flex items-center mb-4 text-accent hover:text-dark transition"> <i class="fas fa-arrow-left mr-2"></i> Volver a inicio </a>
+    <div class="glass-card overflow-hidden">
+        <div class="text-center p-8">
+            <i class="fas fa-heart text-accent text-4xl mb-3"></i>
+            <h1 class="font-serif text-3xl text-dark">Crea tu cuenta</h1>
+            <p class="text-gray-600 mt-2">Únete a tu espacio creativo</p>
+        </div>
+
+        <form id="registerForm" class="px-8 pb-8 space-y-5">
+            <input type="text" id="name" placeholder="Nombre completo" required
+                class="input-field w-full p-3 rounded-lg">
+            <input type="email" id="email" placeholder="Correo electrónico" required
+                class="input-field w-full p-3 rounded-lg">
+
+<div class="relative">
+    <input type="password" id="password" placeholder="Contraseña" required
+        class="input-field w-full p-3 rounded-lg pr-10">
+    <button type="button"
+        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-accent"
+        onclick="togglePassword('password')">
+        <i class="fas fa-eye"></i>
+    </button>
+</div>
+<p class="text-[10px] text-gray-500 my-0 pl-1"> Mínimo 6 caracteres, al menos un número y un carácter especial </p>
+
+<div class="relative">
+    <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" required
+        class="input-field w-full p-3 rounded-lg pr-10">
+    <button type="button"
+        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-accent"
+        onclick="togglePassword('confirmPassword')">
+        <i class="fas fa-eye"></i>
+    </button>
+</div>
+<div class="flex items-center text-sm text-gray-700">
+    <input type="checkbox" id="terms" required class="h-4 w-4 text-accent rounded focus:ring-accent">
+    <label for="terms" class="ml-2"> Acepto los <a href="#" class="text-accent font-semibold hover:underline">Términos y condiciones</a> </label>
+</div>
+
+<button type="submit" class="auth-btn w-full text-white py-3 rounded-full font-semibold"> Crear cuenta </button>
+<div class="text-center text-sm text-gray-600">
+    <p>¿Ya tienes cuenta? <a href="login.html" class="text-accent font-semibold">Inicia sesión</a> </p>
+</div>
+</form>
+</div>
+</div>
+
+<script src="scripts/auth.js"></script>
+</body>
+</html>

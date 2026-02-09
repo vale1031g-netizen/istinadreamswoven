@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Favoritos | Tina’s Dream Woven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="assets/icons/logo-icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#B399D4',
+            accent: '#9575CD',
+            light: '#F3E5F5',
+            dark: '#4A148C'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen font-sans">
+
+<header class="bg-white shadow sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <i class="fas fa-heart text-accent text-2xl"></i>
+      <span class="font-serif text-xl font-semibold">Tina’s Dream Woven - Favoritos</span>
+    </div>
+    <div class="flex gap-3">
+      <a href="inicio.html" class="text-sm bg-primary text-white px-4 py-2 rounded-full hover:bg-accent">Inicio</a>
+      <a href="perfil.html" class="text-sm bg-primary text-white px-4 py-2 rounded-full hover:bg-accent">Perfil</a>
+    </div>
+  </div>
+</header>
+
+<section class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div id="favoritosGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> </div>
+
+    <div id="favoritosVacio" class="hidden text-center text-gray-500 py-20"> Aún no has guardado favoritos. </div>
+
+  </div>
+</section>
+
+<script src="scripts/verfavoritos.js"></script>
+</body>
+</html>

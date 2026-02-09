@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tina’s Dream Woven</title>
+    <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/auth.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B399D4',
+                        secondary: '#E2C7FF',
+                        accent: '#9575CD',
+                        light: '#F3E5F5',
+                        dark: '#4A148C',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                },
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen">
+
+<header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-heart text-accent text-2xl"></i>
+            <a href="#" class="text-lg font-serif font-bold">Tina's Dreams Woven - Tutoriales</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="inicio.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Inicio</a>
+            <a href="perfil.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Perfil</a>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto p-6">
+    <div id="tutorialesGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    <p id="emptyMsg" class="text-center text-gray-500 mt-10 hidden"> Aún no hay tutoriales publicados. </p>
+</main>
+
+<script src="scripts/vertutoriales.js"></script>
+</body>
+</html>
