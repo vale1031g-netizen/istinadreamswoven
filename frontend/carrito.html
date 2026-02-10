@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad | Tina’s Dream Woven</title>
+
+  <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#B399D4',
+            accent: '#9575CD',
+            light: '#F3E5F5',
+            dark: '#4A148C'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen">
+
+<header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-heart text-accent text-2xl"></i>
+            <a href="#" class="text-lg font-serif font-bold">Tina's Dreams Woven - Carrito</a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <a href="inicio.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Inicio</a>
+            <a href="perfil.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Perfil</a>
+            <button id="logoutBtn" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Cerrar sesión</button>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-6 py-10 space-y-6">
+
+  <div id="carrito-container" class="space-y-4"></div>
+
+  <div class="bg-white p-6 rounded-xl shadow flex justify-between items-center">
+    <span class="font-medium">Total:</span>
+    <span id="total" class="text-lg font-semibold text-accent">$0</span>
+  </div>
+
+  <div class="flex justify-end gap-4">
+    <button onclick="vaciarCarrito()"
+      class="px-5 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-sm">
+      Vaciar carrito
+    </button>
+
+    <button
+      class="px-6 py-2 rounded-full bg-primary text-white hover:bg-accent text-sm">
+      Finalizar compra
+    </button>
+  </div>
+
+</main>
+
+<script src="scripts/carrito.js"></script>
+<script>
+  mostrarCarrito();
+</script>
+
+</body>
+</html>
