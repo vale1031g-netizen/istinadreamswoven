@@ -1,71 +1,56 @@
-// Inicializar carrito
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-// Agregar producto
-function agregarAlCarrito(id, nombre, precio, imagen) {
-  const producto = carrito.find(p => p.id === id);
-
-  if (producto) {
-    producto.cantidad++;
-  } else {
-    carrito.push({
-      id,
-      nombre,
-      precio,
-      imagen,
-      cantidad: 1
-    });
+function obtenerCarrito() {
+  try {
+    return JSON.parse(localStorage.getItem("carrito")) || [];
+  } catch (error) {
+    console.error("Error al leer el carrito:", error);
+    return [];
   }
-
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  alert("Producto agregado al carrito");
 }
 
-// Mostrar carrito
+function calcularTotalCarrito() {
+  const carrito = obtenerCarrito();
+  return carrito.reduce((total, item) => {
+    const precio = Number(item.precio) || 0;
+    const cantidad = Number(item.cantidad) || 0;
+    return total + precio * cantidad;
+  }, 0);
+}
+
 function mostrarCarrito() {
+  const carrito = obtenerCarrito();
   const contenedor = document.getElementById("carrito-container");
   const totalSpan = document.getElementById("total");
+
+  if (!contenedor || !totalSpan) return;
+
   contenedor.innerHTML = "";
 
-  let total = 0;
+  if (carrito.length === 0) {
+    contenedor.innerHTML =
+      "<p class='text-center text-gray-500'>Tu carrito está vacío </p>";
+    totalSpan.textContent = "$0";
+    return;
+  }
 
-  carrito.forEach((p, index) => {
-    total += p.precio * p.cantidad;
-
+  carrito.forEach(item => {
     contenedor.innerHTML += `
-      <div class="flex items-center justify-between bg-light p-4 rounded-xl shadow-sm">
-        <div class="flex items-center gap-4">
-          <img src="${p.imagen}" class="w-16 h-16 rounded-lg object-cover">
-          <div>
-            <h4 class="font-medium">${p.nombre}</h4>
-            <p class="text-sm text-gray-600">$${p.precio.toLocaleString()}</p>
-          </div>
+      <div class="bg-white p-4 rounded-xl shadow flex justify-between items-center">
+        <div>
+          <p class="font-medium">${item.nombre}</p>
+          <p class="text-sm text-gray-500">Cantidad: ${item.cantidad}</p>
         </div>
-
-        <div class="flex items-center gap-3">
-          <span class="text-sm">x${p.cantidad}</span>
-          <button onclick="eliminarProducto(${index})"
-            class="text-red-500 hover:text-red-700">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
+        <span class="font-semibold">
+          $${(item.precio * item.cantidad).toLocaleString()}
+        </span>
       </div>
     `;
   });
 
-  totalSpan.textContent = "$" + total.toLocaleString();
+  totalSpan.textContent =
+    "$" + calcularTotalCarrito().toLocaleString();
 }
 
-// Eliminar producto
-function eliminarProducto(index) {
-  carrito.splice(index, 1);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  mostrarCarrito();
-}
-
-// Vaciar carrito
 function vaciarCarrito() {
-  carrito = [];
   localStorage.removeItem("carrito");
   mostrarCarrito();
 }

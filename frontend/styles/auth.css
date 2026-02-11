@@ -68,3 +68,8 @@
 .auth-btn:hover {
     background-color: #9575CD;
 }
+
+#paymentMessage {
+    font-weight: 500;
+    color: #4A148C; 
+}

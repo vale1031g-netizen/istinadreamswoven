@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tina's Dream Woven | Pago</title>
+
+    <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/auth.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B399D4',
+                        secondary: '#E2C7FF',
+                        accent: '#9575CD',
+                        light: '#F3E5F5',
+                        dark: '#4A148C',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                },
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-light text-dark min-h-screen font-sans">
+
+<header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-heart text-accent text-2xl"></i>
+            <span class="text-lg font-serif font-bold">
+                Tina's Dream Woven – Pago
+            </span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="inicio.html"
+               class="text-sm bg-primary text-white px-4 py-2 rounded-full hover:bg-accent transition">
+                Inicio
+            </a>
+            <button id="logoutBtn"
+                class="text-sm bg-primary text-white px-4 py-2 rounded-full hover:bg-accent transition">
+                Cerrar sesión
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-xl mx-auto px-4 py-10">
+    <section data-content="pagos">
+        <h4 class="text-xl font-semibold mb-6 text-center">Realizar Pago</h4>
+
+        <form id="paymentForm" class="bg-white p-6 rounded-2xl space-y-5 shadow">
+
+            <div>
+                <label for="cardName" class="block text-sm font-medium mb-1">
+                    Nombre del titular
+                </label>
+                <input
+                    type="text"
+                    id="cardName"
+                    placeholder="Ej: Valentina González"
+                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                    required>
+            </div>
+
+            <div>
+                <label for="cardNumber" class="block text-sm font-medium mb-1">
+                    Número de tarjeta
+                </label>
+                <input
+                    type="tel"
+                    id="cardNumber"
+                    placeholder="0000 0000 0000 0000"
+                    inputmode="numeric"
+                    maxlength="19"
+                    pattern="[0-9 ]{19}"
+                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                    required>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="cardExpiry" class="block text-sm font-medium mb-1">
+                        Fecha de expiración
+                    </label>
+                    <input
+                        type="text"
+                        id="cardExpiry"
+                        placeholder="MM/AA"
+                        pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
+                        class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                        required>
+                </div>
+
+                <div>
+                    <label for="cardCVV" class="block text-sm font-medium mb-1">
+                        CVV
+                    </label>
+                    <input
+                        type="password"
+                        id="cardCVV"
+                        placeholder="123"
+                        maxlength="3"
+                        inputmode="numeric"
+                        class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                        required>
+                </div>
+            </div>
+
+            <div>
+                <label for="paymentAmount" class="block text-sm font-medium mb-1">
+                    Monto a pagar (COP)
+                </label>
+                <input
+                    type="number"
+                    id="paymentAmount"
+                    min="500"
+                    step="500"
+                    placeholder="Ej: 50000"
+                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                    required>
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-primary text-white py-3 rounded-full text-sm font-medium hover:bg-accent transition">
+                Pagar
+            </button>
+
+            <p id="paymentMessage" class="text-sm text-center mt-2"></p>
+        </form>
+    </section>
+</main>
+
+<script type="module" src="scripts/perfil.js"></script>
+<script type="module" src="scripts/session.js"></script>
+<script type="module" src="scripts/utils.js"></script>
+<script type="module" src="scripts/carrito.js"></script>
+<script type="module" src="scripts/pago.js"></script>
+
+</body>
+</html>

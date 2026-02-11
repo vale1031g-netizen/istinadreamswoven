@@ -62,10 +62,12 @@
       Vaciar carrito
     </button>
 
-    <button
-      class="px-6 py-2 rounded-full bg-primary text-white hover:bg-accent text-sm">
-      Finalizar compra
-    </button>
+<button
+  onclick="irAPago()"
+  class="px-6 py-2 rounded-full bg-primary text-white hover:bg-accent text-sm">
+  Finalizar compra
+</button>
+
   </div>
 
 </main>
@@ -73,6 +75,14 @@
 <script src="scripts/carrito.js"></script>
 <script>
   mostrarCarrito();
+</script>
+<script src="scripts/pago.js"></script>
+<script>
+  function irAPago() {
+    const total = calcularTotalCarrito();
+    localStorage.setItem("totalPago", total);
+    window.location.href = "pago.html";
+  }
 </script>
 
 </body>
