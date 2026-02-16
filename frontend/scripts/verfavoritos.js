@@ -1,59 +1,120 @@
-const favoritosGrid = document.getElementById('favoritosGrid');
-const favoritosVacio = document.getElementById('favoritosVacio');
+document.addEventListener("DOMContentLoaded", cargarFavoritos);
 
-let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+function cargarFavoritos() {
 
-function renderFavoritos() {
-  favoritosGrid.innerHTML = '';
+    const grid = document.getElementById("favoritosGrid");
+    const emptyMsg = document.getElementById("favoritosVacio");
 
-  if (favoritos.length === 0) {
-    favoritosVacio.classList.remove('hidden');
-    return;
-  }
+    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
-  favoritosVacio.classList.add('hidden');
+    grid.innerHTML = "";
 
-  favoritos.forEach((item, index) => {
-    const card = document.createElement('article');
-    card.className = `
-      bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden
-    `;
+    if (favoritos.length === 0) {
+        emptyMsg.classList.remove("hidden");
+        return;
+    }
 
-    card.innerHTML = `
-      <img src="${item.imagen}"
-           class="w-full h-40 object-cover">
+    emptyMsg.classList.add("hidden");
 
-      <div class="p-4 space-y-2">
-        <span class="text-xs uppercase text-gray-500">${item.tipo}</span>
+    favoritos.forEach(patron => {
 
-        <h3 class="font-medium">${item.titulo}</h3>
+        const card = document.createElement("div");
+        card.className =
+            "bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition flex flex-col";
 
-        <p class="text-sm text-gray-600 line-clamp-2">
-          ${item.descripcion}
-        </p>
+        card.innerHTML = `
+            <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-lg mb-2">${patron.nombre}</h3>
 
-        <div class="flex justify-between items-center pt-3">
-          <a href="${item.link}"
-             class="text-sm text-primary hover:underline">
-            Ver
-          </a>
+                <button onclick="eliminarFavorito(${patron.id})">
+                    <i class="fa-solid fa-heart text-red-500 text-lg"></i>
+                </button>
+            </div>
 
-          <button onclick="eliminarFavorito(${index})"
-                  class="text-sm text-gray-500 hover:text-red-600">
-            Quitar
-          </button>
-        </div>
-      </div>
-    `;
+            <p class="text-sm text-gray-600 mb-2">
+                ${patron.descripcion}
+            </p>
 
-    favoritosGrid.appendChild(card);
-  });
+            <p class="text-xs mb-1">
+                <strong>Tipo:</strong> ${patron.tipo}
+            </p>
+
+            <p class="text-accent font-semibold mb-4">
+                $${patron.precio}
+            </p>
+
+            
+            <div class="mt-auto flex gap-2">
+                <button
+                    onclick="verPatron('${patron.content}')"
+                    class="flex-1 bg-primary text-white py-2 rounded-full text-sm hover:bg-accent transition"
+                >
+                    Ver
+                </button>
+
+                <button
+                    onclick="agregarAlCarrito(${patron.id})"
+                    class="flex-1 border border-accent text-accent py-2 rounded-full text-sm hover:bg-accent hover:text-white transition"
+                >
+                    Comprar
+                </button>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
 }
 
-function eliminarFavorito(index) {
-  favoritos.splice(index, 1);
-  localStorage.setItem('favoritos', JSON.stringify(favoritos));
-  renderFavoritos();
+// ===============================
+// VER ARCHIVO
+// ===============================
+
+function verPatron(content) {
+
+    if (!content) {
+        alert("Este patrón no tiene archivo disponible.");
+        return;
+    }
+
+    const nuevaVentana = window.open();
+
+    nuevaVentana.document.write(`
+        <html>
+            <head>
+                <title>Vista del Patrón</title>
+                <style>
+                    body {
+                        margin: 0;
+                        background: #F3E5F5;
+                    }
+                    iframe {
+                        width: 100%;
+                        height: 100vh;
+                        border: none;
+                    }
+                </style>
+            </head>
+            <body>
+                <iframe src="${content}"></iframe>
+            </body>
+        </html>
+    `);
+
+    nuevaVentana.document.close();
 }
 
-renderFavoritos();
+
+// ===============================
+// ELIMINAR FAVORITO
+// ===============================
+
+function eliminarFavorito(id) {
+
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+    favoritos = favoritos.filter(f => f.id !== id);
+
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+    cargarFavoritos();
+}

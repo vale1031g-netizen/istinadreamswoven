@@ -1,43 +1,64 @@
-const nuevoPedido = {
-  codigo: Math.floor(Math.random() * 100000),
-  fecha: new Date().toLocaleDateString(),
-  estado: 'En proceso',
-  total: 85000,
-  productos: [
-    { nombre: 'Bolso crochet', cantidad: 1 },
-    { nombre: 'Gorro tejido', cantidad: 2 }
-  ]
-};
-let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-pedidos.push(nuevoPedido);
-localStorage.setItem("pedidos", JSON.stringify(pedidos));
-
-const grid = document.getElementById("pedidosGrid");
-const emptyMsg = document.getElementById("emptyMsg");
-
-if (pedidos.length === 0) {
-  emptyMsg.classList.remove("hidden");
+function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+    menu.classList.toggle("translate-x-full");
+    overlay.classList.toggle("hidden");
 }
 
-pedidos.forEach(pedido => {
-  const card = document.createElement("div");
-  card.className = "bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden";
+function buscarPedidos() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const items = document.querySelectorAll("#pedidosGrid > div");
 
-  const productosList = pedido.productos.map(p => `<li>${p.nombre} x${p.cantidad}</li>`).join('');
+    items.forEach(item => {
+        const texto = item.textContent.toLowerCase();
+        item.style.display = texto.includes(input) ? "block" : "none";
+    });
+}
 
-  card.innerHTML = `
-    <div class="p-4 space-y-2">
-      <h3 class="font-semibold text-lg">Pedido #${pedido.codigo}</h3>
-      <p class="text-sm text-gray-500">Fecha: ${pedido.fecha}</p>
-      <p class="text  -sm text-gray-500">Estado: ${pedido.estado}</p>
-      <ul class="text-sm text-gray-500">Productos: ${productosList}</ul>
-      <div class="flex justify-between items-center mt-3">
-        <span class="text-primary font-bold">
-          Total: $${Number(pedido.total).toLocaleString('es-CO')} COP
-        </span>
-      </div>
-    </div>
-  `;
+// Vaciar todos los pedidos
+function vaciarPedidos() {
+    localStorage.removeItem("pedidos");
+    document.getElementById("pedidosGrid").innerHTML = '';
+    document.getElementById("emptyMsg").classList.remove("hidden");
+}
 
-  grid.appendChild(card);
-});
+// Cargar pedidos existentes al iniciar
+document.addEventListener("DOMContentLoaded", cargarPedidos);
+
+function cargarPedidos() {
+    const grid = document.getElementById("pedidosGrid");
+    const emptyMsg = document.getElementById("emptyMsg");
+    const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    if (pedidos.length === 0) {
+        emptyMsg.classList.remove("hidden");
+        return;
+    }
+
+    emptyMsg.classList.add("hidden");
+
+    pedidos.forEach(pedido => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden";
+
+        const productosList = pedido.productos.length
+            ? pedido.productos.map(p => `<li>${p.nombre} x${p.cantidad}</li>`).join('')
+            : '<li>No hay productos</li>';
+
+        card.innerHTML = `
+            <div class="p-4 space-y-2">
+                <h3 class="font-semibold text-lg">Pedido #${pedido.codigo}</h3>
+                <p class="text-sm text-gray-500">Fecha: ${pedido.fecha}</p>
+                <p class="text-sm text-gray-500">Estado: ${pedido.estado || 'Pendiente'}</p>
+                <ul class="text-sm text-gray-500">Productos: ${productosList}</ul>
+                <div class="flex justify-between items-center mt-3">
+                    <span class="text-primary font-bold">
+                        Total: ${pedido.total ? `$${Number(pedido.total).toLocaleString('es-CO')} COP` : 'No calculado'}
+                    </span>
+                </div>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}

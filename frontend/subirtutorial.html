@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subir Tutorial | Tina’s Dreams Woven</title>
+
+<link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#B399D4',
+        accent: '#9575CD',
+        light: '#F3E5F5',
+        dark: '#4A148C'
+      },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+        serif: ['Playfair Display', 'serif']
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body class="bg-light text-dark min-h-screen font-sans">
+
+<!-- HEADER -->
+<header class="bg-white shadow sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <i class="fas fa-heart text-accent text-2xl"></i>
+      <span class="font-serif text-xl font-semibold">Tina’s Dreams Woven - Tutoriales</span>
+    </div>
+
+    <!-- Botón hamburguesa -->
+    <button onclick="toggleMenu()" class="text-accent text-2xl hover:text-dark transition">
+      <i class="fas fa-bars"></i>
+    </button>
+
+  </div>
+</header>
+
+<!-- MENÚ LATERAL -->
+<div id="sideMenu" class="fixed top-0 right-0 h-full w-72 bg-white shadow-xl transform translate-x-full transition-transform duration-300 z-50">
+  <div class="p-6 border-b flex justify-between items-center">
+    <h2 class="font-serif text-lg text-dark">Mi Perfil</h2>
+    <button onclick="toggleMenu()" class="text-accent text-xl">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <nav class="p-6 space-y-4 text-sm">
+    <a href="inicio.html" class="block hover:text-accent transition">
+      <i class="fas fa-home mr-2"></i> Inicio
+    </a>
+    <a href="perfil.html" class="block hover:text-accent transition">
+      <i class="fas fa-user mr-2"></i> Perfil
+    </a>
+    <a href="verproductos.html" class="block hover:text-accent transition">
+      <i class="fas fa-th mr-2"></i> Productos
+    </a>
+    <a href="verpatrones.html" class="block text-accent font-semibold">
+      <i class="fas fa-th-list mr-2"></i> Patrones
+    </a>
+    <a href="vertutoriales.html" class="block hover:text-accent transition">
+      <i class="fas fa-video mr-2"></i> Tutoriales
+    </a>
+    <a href="verfavoritos.html" class="block hover:text-accent transition">
+      <i class="fas fa-heart mr-2"></i> Favoritos
+    </a>
+    <a href="verpedidos.html" class="block hover:text-accent transition">
+      <i class="fas fa-box mr-2"></i> Pedidos
+    </a>
+    <a href="carrito.html" class="block hover:text-accent transition">
+      <i class="fas fa-shopping-cart mr-2"></i> Carrito
+    </a>
+    <a href="login.html" class="block hover:text-red-500 transition">
+      <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+    </a>
+  </nav>
+</div>
+
+<!-- Overlay oscuro -->
+<div id="overlay" onclick="toggleMenu()" class="fixed inset-0 bg-black bg-opacity-40 hidden z-40"></div>
+
+<body class="bg-light text-dark font-sans min-h-screen flex flex-col">
+
+<!-- CONTENIDO -->
+<main class="flex-grow flex items-center justify-center px-4 py-12">
+
+    <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-xl">
+
+        <h2 class="text-xl font-serif mb-6 text-center">
+            Subir nuevo tutorial
+        </h2>
+
+        <form id="tutorialForm" class="space-y-4">
+
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Nombre del tutorial
+                </label>
+                <input
+                    id="tutorialName"
+                    type="text"
+                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                    required
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Descripción
+                </label>
+                <input
+                    id="tutorialDescripcion"
+                    type="text"
+                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                    required
+                >
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Precio (COP)
+                </label>
+                <input
+                    id="tutorialPrecio"
+                    type="number"
+                    min="0"
+                    step="500"
+                    class="w-full border px-4 py-3 rounded-full text-sm focus:ring-2 focus:ring-primary outline-none"
+                    required
+                >
+                <p class="text-xs text-gray-500 mt-1">
+                    Pesos colombianos
+                </p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Archivo del tutorial
+                </label>
+                <input
+                    id="tutorialFile"
+                    type="file"
+                    class="w-full text-sm"
+                    required
+                >
+            </div>
+
+            <button id="guardarTutorialBtn" type="button"
+                class="bg-primary text-white w-full py-3 rounded-full hover:bg-accent transition"
+            >
+                Guardar tutorial
+            </button>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+<script src="scripts/subirtutorial.js"></script>
+<script>
+  // Toggle menú lateral
+  function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+    menu.classList.toggle("translate-x-full");
+    overlay.classList.toggle("hidden");
+  }
+</script>
+
+</body>
+</html>

@@ -352,9 +352,10 @@
                         </div>
 
                         <div class="tab-content hidden" data-content="ajustes">
-                            <h4 class="font-semibold mb-4">Ajustes de la cuenta</h4>
                             <form id="settingsForm" class="space-y-4 bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold mb-4">Ajustes de la cuenta</h4>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
                                     <div>
                                         <label class="text-sm font-medium">Nombre completo</label>
                                         <input type="text" id="nameInput" class="mt-1 block w-full border rounded px-3 py-2" value="valentina gonzález">
@@ -389,6 +390,61 @@
                                     <button type="button" id="cancelSettings" class="px-4 py-2 border rounded">Cancelar</button>
                                     <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-accent">Guardar cambios</button>
                                 </div>
+
+                                <!-- Botón para mostrar manual -->
+                                <button 
+                                    type="button" 
+                                    onclick="toggleManual()" 
+                                    class="mb-4 text-accent font-semibold hover:underline transition">
+                                    Ver Manual de Usuario
+                                </button>
+
+                                <!-- CONTENEDOR DEL MANUAL -->
+                                <div id="manualInfo" class="hidden bg-light p-6 rounded-lg text-sm text-gray-700 space-y-4 max-h-[500px] overflow-y-auto">
+
+                                    <h3 class="text-lg font-semibold text-dark">Manual de Usuario</h3>
+
+                                    <p>Bienvenido(a) al manual de usuario de Tina’s Dreams Woven. Este espacio ha sido creado para orientarte en el uso correcto de nuestra plataforma y ayudarte a aprovechar al máximo cada una de sus funciones. Queremos que tu experiencia sea sencilla, clara y agradable mientras exploras nuestro espacio creativo.</p>
+
+                                    <h4 class="font-semibold text-accent">Si aún no tienes cuenta, sigue estos pasos:</h4>
+                                    <p class="font-semibold mt-2">Registro de Usuario</p>
+                                    <ol class="list-decimal ml-5">
+                                        <li>Hacer clic en Crear cuenta.</li>
+                                        <li>Diligenciar el formulario.</li>
+                                        <li>Verificar datos.</li>
+                                        <li>Crear cuenta.</li>
+                                    </ol>
+                                    
+                                    <h4 class="font-semibold text-accent">Si ya tienes cuenta, sigue estos pasos:</h4>
+                                    <p class="font-semibold mt-2">Inicio de Sesión</p>
+                                    <ol class="list-decimal ml-5">
+                                        <li>Hacer clic en Iniciar sesión.</li>
+                                        <li>Ingresar correo y contraseña.</li>
+                                        <li>Presionar Iniciar sesión.</li>
+                                    </ol>
+
+                                    <p class="font-semibold mt-2">Perfil de Usuario</p>
+                                    <ul class="list-disc ml-5">
+                                        <li>Visualizar información.</li>
+                                        <li>Actualizar datos.</li>
+                                        <li>Subir contenido.</li>
+                                        <li>Cerrar sesión.</li>
+                                    </ul>
+
+                                    <p class="mt-4 text-sm text-gray-600">Si tienes alguna duda, contacta con soporte técnico.</p>
+
+                                    <div>
+                                    <h4 class="font-semibold text-accent">Recomendaciones</h4>
+                                    <ul class="list-disc ml-5">
+                                        <li>Mantener el navegador actualizado.</li>
+                                        <li>Tener conexión estable.</li>
+                                        <li>No cerrar mientras carga la información.</li>
+                                    </ul>
+                                    </div>
+
+                                </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -405,6 +461,24 @@
                 </form>
             </div>
         </div>
+        <div id="deleteModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center">
+            <div class="bg-white p-6 rounded-lg w-full max-w-md text-center">
+                <h3 class="font-semibold mb-4">¿Eliminar cuenta?</h3>
+                <p class="text-gray-600 mb-6">Esta acción no se puede deshacer.</p>
+                <div class="flex justify-center gap-4">
+                    <button id="cancelDelete" class="px-4 py-2 border rounded">Cancelar</button>
+                    <button id="confirmDelete" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+<script>
+function toggleManual() {
+    const manual = document.getElementById("manualInfo");
+    manual.classList.toggle("hidden");
+}
+</script>
+
 
 <script type="module" src="scripts/perfil.js"></script>
 <script type="module" src="scripts/session.js"></script>

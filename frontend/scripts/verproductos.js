@@ -1,38 +1,33 @@
-const grid = document.getElementById("productosGrid");
-const emptyMsg = document.getElementById("emptyMsg");
+// scripts/verproductos.js
 
-const productos = JSON.parse(localStorage.getItem("productos")) || [];
+document.addEventListener("DOMContentLoaded", () => {
+    const productosGrid = document.getElementById("productosGrid");
+    const emptyMsg = document.getElementById("emptyMsg");
 
-if (productos.length === 0) {
-  emptyMsg.classList.remove("hidden");
-}
+    const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-productos.forEach(producto => {
-  const card = document.createElement("div");
-  card.className = "bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden";
+    if (productos.length === 0) {
+        emptyMsg.classList.remove("hidden");
+        return;
+    } else {
+        emptyMsg.classList.add("hidden");
+    }
 
-  card.innerHTML = `
-    <img src="${producto.imagen}" class="w-full h-48 object-cover">
+    productos.forEach(producto => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl p-4 shadow hover:shadow-lg transition-shadow flex flex-col";
 
-    <div class="p-4 space-y-2">
-      <h3 class="font-semibold text-lg">${producto.nombre}</h3>
-      <p class="text-sm text-gray-500">${producto.descripcion}</p>
+        card.innerHTML = `
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-48 object-cover rounded-lg mb-3">
+            <h3 class="text-lg font-semibold mb-1">${producto.nombre}</h3>
+            <p class="text-sm text-gray-600 mb-2">${producto.descripcion}</p>
+            <p class="text-sm font-medium mb-2">Categoría: ${producto.categoria}</p>
+            <p class="text-primary font-semibold mb-3">$${producto.precio.toLocaleString('es-CO')}</p>
+            <button class="bg-accent hover:bg-primary text-white text-sm py-2 rounded-full add-to-cart" data-id="${producto.id}">
+                Agregar al carrito
+            </button>
+        `;
 
-      <div class="flex justify-between items-center mt-3">
-        <span class="text-primary font-bold">
-          $${Number(producto.precio).toLocaleString('es-CO')} COP
-        </span>
-        <span class="text-xs text-gray-400">
-          Stock: ${producto.stock}
-        </span>
-      </div>
-
-      <button class="w-full mt-3 bg-primary text-white py-2 rounded-full hover:bg-accent transition">
-        Ver detalle
-      </button>
-    </div>
-  `;
-
-  grid.appendChild(card);
+        productosGrid.appendChild(card);
+    });
 });
-
