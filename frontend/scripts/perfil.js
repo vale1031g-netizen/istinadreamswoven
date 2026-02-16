@@ -1,253 +1,212 @@
-// ===============================
-// UTILIDADES
-// ===============================
-function $(id) {
-  return document.getElementById(id);
+document.addEventListener("DOMContentLoaded", () => {
+    cargarPerfil();
+    configurarTabs();
+    configurarEdicionPerfil();
+    configurarAjustes();
+    cargarResumenContenido();
+});
+
+// Cargar datos de perfil
+
+function cargarPerfil() {
+    const user = JSON.parse(localStorage.getItem("usuarioActivo")) || {};
+
+    document.getElementById("displayName").textContent =
+        user.nombre || "Usuario";
+
+    document.getElementById("bio").textContent =
+        user.bio || "Aún no has agregado una biografía.";
+
+    const productos = JSON.parse(localStorage.getItem("productos")) || [];
+    const patrones = JSON.parse(localStorage.getItem("patrones")) || [];
+
+    document.getElementById("statProducts").textContent = productos.length;
+    document.getElementById("statPatterns").textContent = patrones.length;
+    document.getElementById("statFollowers").textContent =
+        user.seguidores || 0;
 }
 
-function getLS(key) {
-  return JSON.parse(localStorage.getItem(key)) || [];
-}
+// Configuración de tabs
 
-function setLS(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+function configurarTabs() {
+    const buttons = document.querySelectorAll(".tab-btn");
+    const contents = document.querySelectorAll(".tab-content");
 
-// ===============================
-// TABS PERFIL
-// ===============================
-const tabButtons = document.querySelectorAll('.tab-btn');
-const tabContents = document.querySelectorAll('.tab-content');
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const tab = btn.dataset.tab;
 
-tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
+            
+            buttons.forEach(b => b.classList.remove("bg-primary", "text-primary"));
+            btn.classList.add("bg-primary", "text-primary");
 
-    tabButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    tabContents.forEach(c => {
-      c.classList.toggle('hidden', c.dataset.content !== tab);
+            contents.forEach(content => {
+                content.classList.add("hidden");
+                if (content.dataset.content === tab) {
+                    content.classList.remove("hidden");
+                }
+            });
+        });
     });
-  });
-});
-
-// ===============================
-// PERFIL (EDITAR INFO)
-// ===============================
-const editModal = $('editModal');
-const openEditBtn = $('openEditBtn');
-
-openEditBtn?.addEventListener('click', () => {
-  editModal.classList.remove('hidden');
-  editModal.classList.add('flex');
-});
-
-editModal?.addEventListener('click', e => {
-  if (e.target === editModal) editModal.classList.add('hidden');
-});
-
-$('editProfileForm')?.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const name = $('fullName').value;
-  const bio = $('bioInput').value;
-
-  setLS('profile', { name, bio });
-
-  $('displayName').textContent = name;
-  $('bio').textContent = bio;
-
-  editModal.classList.add('hidden');
-});
-
-// Cargar perfil
-(() => {
-  const profile = getLS('profile');
-  if (!profile) return;
-
-  $('displayName').textContent = profile.name || 'Usuario';
-  $('bio').textContent = profile.bio || '';
-})();
-
-// ===============================
-// FAVORITOS
-// ===============================
-function loadFavorites() {
-  const favorites = getLS('favoritos');
-  const list = $('favoritesList');
-  list.innerHTML = '';
-
-  if (!favorites.length) {
-    list.innerHTML = `<p class="text-gray-500 col-span-full">Aún no tienes favoritos</p>`;
-    return;
-  }
-
-  favorites.forEach((f, i) => {
-    list.innerHTML += `
-      <div class="bg-white rounded-lg shadow p-3 flex gap-3">
-        <img src="${f.file}" class="w-20 h-20 object-cover rounded">
-        <div class="flex-1">
-          <h4 class="font-semibold">${f.title}</h4>
-          <p class="text-xs text-gray-500">${f.type}</p>
-        </div>
-        <button onclick="removeFavorite(${i})" class="text-red-500">
-          <i class="fas fa-heart-broken"></i>
-        </button>
-      </div>
-    `;
-  });
 }
 
-function removeFavorite(index) {
-  const favorites = getLS('favoritos');
-  favorites.splice(index, 1);
-  setLS('favoritos', favorites);
-  loadFavorites();
-}
+// Edición de perfil
 
-loadFavorites();
+function configurarEdicionPerfil() {
+    const modal = document.getElementById("editModal");
+    const openBtn = document.getElementById("openEditBtn");
+    const form = document.getElementById("editProfileForm");
 
-// ===============================
-// SUBIR ARCHIVOS (PATRONES / TUTORIALES)
-// ===============================
-function uploadFile(section) {
-  const fileInput =
-    section === 'patrones'
-      ? $('patronFile')
-      : $('tutorialFile');
+    const user = JSON.parse(localStorage.getItem("usuarioActivo")) || {};
+    document.getElementById("fullName").value = user.nombre || "";
+    document.getElementById("bioInput").value = user.bio || "";
 
-  if (!fileInput || !fileInput.files.length) {
-    alert('Selecciona un archivo primero');
-    return;
-  }
-
-  const file = fileInput.files[0];
-  const items = getLS(section);
-
-  // Videos (tutoriales)
-  if (file.type.startsWith('video/')) {
-    const videoURL = URL.createObjectURL(file);
-
-    items.push({
-      id: Date.now(),
-      name: file.name,
-      type: file.type,
-      content: videoURL,
-      isVideo: true,
-      createdAt: new Date().toISOString()
+    openBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
     });
 
-    setLS(section, items);
-    fileInput.value = '';
-    renderFiles(section);
-    return;
-  }
-
-  // Archivos normales (PDF / imágenes)
-  const reader = new FileReader();
-  reader.onload = e => {
-    items.push({
-      id: Date.now(),
-      name: file.name,
-      type: file.type,
-      content: e.target.result,
-      createdAt: new Date().toISOString()
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.add("hidden");
+        }
     });
 
-    setLS(section, items);
-    fileInput.value = '';
-    renderFiles(section);
-  };
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-  reader.readAsDataURL(file);
+        const fullName = document.getElementById("fullName").value;
+        const bio = document.getElementById("bioInput").value;
+
+        const user = JSON.parse(localStorage.getItem("usuarioActivo")) || {};
+        user.nombre = fullName;
+        user.bio = bio;
+
+        localStorage.setItem("usuarioActivo", JSON.stringify(user));
+
+        modal.classList.add("hidden");
+        cargarPerfil();
+    });
 }
 
-// ===============================
-// RENDER ARCHIVOS
-// ===============================
-function renderFiles(section) {
-  const files = getLS(section);
-  const container =
-    section === 'patrones'
-      ? $('patronesList')
-      : $('tutorialesList');
+// Ajustes de cuenta
 
-  container.innerHTML = '';
+function configurarAjustes() {
+    const form = document.getElementById("settingsForm");
+    const deleteBtn = document.getElementById("openDeleteModal");
 
-  if (!files.length) {
-    container.innerHTML = `<p class="text-gray-500">No hay archivos subidos.</p>`;
-    return;
-  }
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-  files.forEach((f, i) => {
-    container.innerHTML += `
-      <div class="bg-white p-3 rounded shadow flex justify-between items-center">
-        <div>
-          <strong>${f.name}</strong>
-          <p class="text-xs text-gray-500">${f.type}</p>
-        </div>
-        <div class="flex gap-2">
-          <button onclick="viewFile('${section}', ${i})"
-            class="px-2 py-1 bg-blue-500 text-white rounded">Ver</button>
-          <button onclick="deleteFile('${section}', ${i})"
-            class="px-2 py-1 bg-red-500 text-white rounded">Eliminar</button>
-        </div>
-      </div>
-    `;
-  });
+        const user = JSON.parse(localStorage.getItem("usuarioActivo")) || {};
+
+        user.nombre = document.getElementById("nameInput").value;
+        user.username = document.getElementById("usernameInput").value;
+        user.email = document.getElementById("emailInput").value;
+        user.pais = document.getElementById("countryInput").value;
+        user.idioma = document.getElementById("languageSelect").value;
+        user.newsletter = document.getElementById("newsletter").checked;
+
+        localStorage.setItem("usuarioActivo", JSON.stringify(user));
+
+        alert("Cambios guardados correctamente.");
+        cargarPerfil();
+    });
+
+    deleteBtn.addEventListener("click", () => {
+        const confirmacion = confirm("¿Estás segura de eliminar tu cuenta?");
+        if (!confirmacion) return;
+
+        localStorage.removeItem("usuarioActivo");
+        alert("Cuenta eliminada correctamente.");
+        window.location.href = "login.html";
+    });
 }
 
-// ===============================
-// VER ARCHIVO
-// ===============================
-function viewFile(section, index) {
-  const f = getLS(section)[index];
-  if (!f) return;
+// Contenido subido
 
-  const win = window.open();
-  win.document.write(`<h2>${f.name}</h2>`);
+function cargarResumenContenido() {
+    const grid = document.getElementById("resumenGrid");
+    const emptyMsg = document.getElementById("emptyResumen");
 
-  if (f.isVideo) {
-    win.document.write(`
-      <video controls width="100%">
-        <source src="${f.content}" type="${f.type}">
-      </video>
-    `);
-  } else if (f.type.startsWith('image/')) {
-    win.document.write(`<img src="${f.content}" style="max-width:100%">`);
-  } else if (f.type === 'application/pdf') {
-    win.document.write(`<iframe src="${f.content}" width="100%" height="600"></iframe>`);
-  }
+    const productos = JSON.parse(localStorage.getItem("productos")) || [];
+    const patrones = JSON.parse(localStorage.getItem("patrones")) || [];
+    const tutoriales = JSON.parse(localStorage.getItem("tutoriales")) || [];
+
+    grid.innerHTML = "";
+
+    const contenido = [
+        ...productos.map((p, i) => ({
+            tipo: "Producto",
+            nombre: p.nombre,
+            index: i,
+            storage: "productos"
+        })),
+        ...patrones.map((p, i) => ({
+            tipo: "Patrón",
+            nombre: p.nombre,
+            index: i,
+            storage: "patrones"
+        })),
+        ...tutoriales.map((t, i) => ({
+            tipo: "Tutorial",
+            nombre: t.nombre,
+            index: i,
+            storage: "tutoriales"
+        }))
+    ];
+
+    if (contenido.length === 0) {
+        emptyMsg.classList.remove("hidden");
+        return;
+    }
+
+    emptyMsg.classList.add("hidden");
+
+    contenido.forEach(item => {
+        const card = document.createElement("div");
+        card.className =
+            "bg-white p-4 rounded-lg shadow-sm border flex justify-between items-center";
+
+        card.innerHTML = `
+            <div>
+                <div class="text-xs text-gray-500">${item.tipo}</div>
+                <div class="font-semibold">${item.nombre}</div>
+            </div>
+            <button 
+                class="text-red-500 hover:text-red-700 transition"
+                data-storage="${item.storage}"
+                data-index="${item.index}">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+
+        grid.appendChild(card);
+    });
+
+    configurarBotonesEliminar();
 }
 
-// ===============================
-// ELIMINAR ARCHIVO
-// ===============================
-function deleteFile(section, index) {
-  const files = getLS(section);
-  if (confirm(`¿Eliminar "${files[index].name}"?`)) {
-    files.splice(index, 1);
-    setLS(section, files);
-    renderFiles(section);
-  }
+// Eliminar contenido
+
+function configurarBotonesEliminar() {
+    const botones = document.querySelectorAll("#resumenGrid button");
+
+    botones.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const storage = btn.dataset.storage;
+            const index = parseInt(btn.dataset.index);
+
+            const confirmacion = confirm("¿Deseas eliminar este contenido?");
+            if (!confirmacion) return;
+
+            let lista = JSON.parse(localStorage.getItem(storage)) || [];
+            lista.splice(index, 1);
+
+            localStorage.setItem(storage, JSON.stringify(lista));
+
+            cargarResumenContenido();
+            cargarPerfil();
+        });
+    });
 }
-
-// ===============================
-// INIT
-// ===============================
-document.addEventListener('DOMContentLoaded', () => {
-  $('uploadPatronBtn')?.addEventListener('click', () => uploadFile('patrones'));
-  $('uploadTutorialBtn')?.addEventListener('click', () => uploadFile('tutoriales'));
-
-  renderFiles('patrones');
-  renderFiles('tutoriales');
-});
-
-// ===============================
-// EXPORT GLOBAL
-// ===============================
-window.uploadFile = uploadFile;
-window.viewFile = viewFile;
-window.deleteFile = deleteFile;
-window.removeFavorite = removeFavorite;

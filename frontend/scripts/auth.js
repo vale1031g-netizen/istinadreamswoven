@@ -1,21 +1,20 @@
-// Toggle de contraseñas
+// Toggle de contraseñas para login y registro
 function togglePassword(id) {
     const input = document.getElementById(id);
     const icon = input.nextElementSibling.querySelector("i");
 
     if (input.type === "password") {
-        input.type = "text";
+        input.type = "text";             // Mostrar contraseña
         icon.classList.remove("fa-eye");
         icon.classList.add("fa-eye-slash");
     } else {
-        input.type = "password";
+        input.type = "password";         // Ocultar contraseña
         icon.classList.remove("fa-eye-slash");
         icon.classList.add("fa-eye");
     }
 }
 
-
-// Validación de contraseña
+// Validación de contraseña (mínimo 6 caracteres, 1 número y 1 símbolo)
 function isValidPassword(pwd) {
     return pwd.length >= 6 && /[0-9]/.test(pwd) && /[!@#$%^&*]/.test(pwd);
 }

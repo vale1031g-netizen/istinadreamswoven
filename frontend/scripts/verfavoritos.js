@@ -16,7 +16,7 @@ function cargarFavoritos() {
 
     emptyMsg.classList.add("hidden");
 
-    favoritos.forEach(patron => {
+    favoritos.forEach(item => {
 
         const card = document.createElement("div");
         card.className =
@@ -24,97 +24,133 @@ function cargarFavoritos() {
 
         card.innerHTML = `
             <div class="flex justify-between items-start">
-                <h3 class="font-semibold text-lg mb-2">${patron.nombre}</h3>
+                <h3 class="font-semibold text-lg mb-2">${item.nombre}</h3>
 
-                <button onclick="eliminarFavorito(${patron.id})">
+                <button onclick="eliminarFavorito(${item.id})">
                     <i class="fa-solid fa-heart text-red-500 text-lg"></i>
                 </button>
             </div>
 
             <p class="text-sm text-gray-600 mb-2">
-                ${patron.descripcion}
+                ${item.descripcion || "Sin descripción"}
             </p>
 
             <p class="text-xs mb-1">
-                <strong>Tipo:</strong> ${patron.tipo}
+                <strong>Tipo:</strong> ${item.tipo || "No especificado"}
             </p>
 
-            <p class="text-accent font-semibold mb-4">
-                $${patron.precio}
-            </p>
+            ${item.precio ? `<p class="text-accent font-semibold mb-4">$${item.precio}</p>` : ""}
 
-            
             <div class="mt-auto flex gap-2">
+
                 <button
-                    onclick="verPatron('${patron.content}')"
-                    class="flex-1 bg-primary text-white py-2 rounded-full text-sm hover:bg-accent transition"
+                    class="btn-ver flex-1 bg-primary text-white py-2 rounded-full text-sm hover:bg-accent transition"
+                    data-content="${item.content || item.link || ""}"
                 >
                     Ver
                 </button>
 
                 <button
-                    onclick="agregarAlCarrito(${patron.id})"
+                    onclick="agregarAlCarrito(${item.id})"
                     class="flex-1 border border-accent text-accent py-2 rounded-full text-sm hover:bg-accent hover:text-white transition"
                 >
                     Comprar
                 </button>
+
             </div>
         `;
 
         grid.appendChild(card);
     });
+
+    // Eventos del botón Ver
+    document.querySelectorAll(".btn-ver").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const content = this.getAttribute("data-content");
+            verContenido(content);
+        });
+    });
 }
-
-// ===============================
-// VER ARCHIVO
-// ===============================
-
-function verPatron(content) {
-
-    if (!content) {
-        alert("Este patrón no tiene archivo disponible.");
-        return;
-    }
-
-    const nuevaVentana = window.open();
-
-    nuevaVentana.document.write(`
-        <html>
-            <head>
-                <title>Vista del Patrón</title>
-                <style>
-                    body {
-                        margin: 0;
-                        background: #F3E5F5;
-                    }
-                    iframe {
-                        width: 100%;
-                        height: 100vh;
-                        border: none;
-                    }
-                </style>
-            </head>
-            <body>
-                <iframe src="${content}"></iframe>
-            </body>
-        </html>
-    `);
-
-    nuevaVentana.document.close();
-}
-
-
-// ===============================
-// ELIMINAR FAVORITO
-// ===============================
 
 function eliminarFavorito(id) {
 
     let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-
     favoritos = favoritos.filter(f => f.id !== id);
 
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
 
     cargarFavoritos();
+}
+
+function agregarAlCarrito(id) {
+
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+    const producto = favoritos.find(f => f.id === id);
+
+    if (!producto) {
+        alert("Producto no encontrado.");
+        return;
+    }
+
+    const existente = carrito.find(c => c.id === id);
+
+    if (existente) {
+        existente.cantidad += 1;
+    } else {
+        carrito.push({
+            ...producto,
+            cantidad: 1
+        });
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert("Producto agregado al carrito");
+}
+
+function verContenido(content) {
+
+    if (!content) {
+        alert("No hay contenido disponible.");
+        return;
+    }
+
+    // PDF con prefijo completo
+    if (content.startsWith("data:application/pdf;base64,")) {
+        const base64 = content.split(",")[1];
+        abrirPDF(base64);
+        return;
+    }
+
+    // PDF base64 puro
+    if (content.startsWith("JVBER")) {
+        abrirPDF(content);
+        return;
+    }
+
+    // Enlace normal
+    window.open(content, "_blank");
+}
+
+function abrirPDF(base64) {
+
+    try {
+        const byteCharacters = atob(base64);
+        const byteNumbers = new Array(byteCharacters.length);
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: "application/pdf" });
+
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+    } catch (error) {
+        console.error("Error abriendo PDF:", error);
+        alert("El archivo PDF está dañado o incompleto.");
+    }
 }

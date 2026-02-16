@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Carrito | Tina’s Dreams Woven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+  <link rel="icon" href="assets/icons/logo-icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,22 +30,79 @@
   </script>
 </head>
 
-<body class="bg-light text-dark min-h-screen">
+<body class="bg-light text-dark min-h-screen font-sans">
 
-<header class="bg-white shadow sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <i class="fas fa-heart text-accent text-2xl"></i>
-            <a href="#" class="text-lg font-serif font-bold">Tina's Dreams Woven - Carrito</a>
-        </div>
-        
-        <div class="flex items-center gap-4">
-            <a href="inicio.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Inicio</a>
-            <a href="perfil.html" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Perfil</a>
-            <button id="logoutBtn" class="text-sm bg-primary text-white px-3 py-2 rounded-full hover:bg-accent">Cerrar sesión</button>
-        </div>
+<!-- HEADER -->
+<header class="bg-white shadow sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <i class="fas fa-heart text-accent text-2xl"></i>
+      <span class="font-serif text-xl font-semibold">Tina’s Dreams Woven - Carrito</span>
     </div>
+
+    <!-- Botón hamburguesa -->
+    <button onclick="toggleMenu()" class="text-accent text-2xl hover:text-dark transition">
+      <i class="fas fa-bars"></i>
+    </button>
+
+  </div>
 </header>
+
+<!-- MENÚ LATERAL -->
+<div id="sideMenu" class="fixed top-0 right-0 h-full w-72 bg-white shadow-xl transform translate-x-full transition-transform duration-300 z-50">
+
+  <div class="p-6 border-b flex justify-between items-center">
+    <h2 class="font-serif text-lg text-dark">Mi Perfil</h2>
+    <button onclick="toggleMenu()" class="text-accent text-xl">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <nav class="p-6 space-y-4 text-sm">
+
+    <a href="inicio.html" class="block hover:text-accent transition">
+      <i class="fas fa-home mr-2"></i> Inicio
+    </a>
+
+    <a href="perfil.html" class="block hover:text-accent transition">
+      <i class="fas fa-user mr-2"></i> Perfil
+    </a>
+
+    <a href="verproductos.html" class="block hover:text-accent transition">
+      <i class="fas fa-th mr-2"></i> Productos
+    </a>
+
+    <a href="verpatrones.html" class="block hover:text-accent transition">
+      <i class="fas fa-th-list mr-2"></i> Patrones
+    </a>
+
+    <a href="vertutoriales.html" class="block hover:text-accent transition">
+      <i class="fas fa-video mr-2"></i> Tutoriales
+    </a>
+
+    <a href="verfavoritos.html" class="block text-accent font-semibold">
+      <i class="fas fa-heart mr-2"></i> Favoritos
+    </a>
+
+    <a href="verpedidos.html" class="block hover:text-accent transition">
+      <i class="fas fa-box mr-2"></i> Pedidos
+    </a>
+
+    <a href="carrito.html" class="block hover:text-accent transition">
+      <i class="fas fa-shopping-cart mr-2"></i> Carrito
+    </a>
+
+    <a href="login.html" class="block hover:text-red-500 transition">
+      <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+    </a>
+
+  </nav>
+</div>
+
+<!-- Overlay oscuro -->
+<div id="overlay" onclick="toggleMenu()" class="fixed inset-0 bg-black bg-opacity-40 hidden z-40"></div>
 
 <main class="max-w-4xl mx-auto px-6 py-10 space-y-6">
 
@@ -85,5 +142,14 @@
   }
 </script>
 
-</body>
+<script>
+    // Toggle menú lateral
+    function toggleMenu() {
+      const menu = document.getElementById("sideMenu");
+      const overlay = document.getElementById("overlay");
+      menu.classList.toggle("translate-x-full");
+      overlay.classList.toggle("hidden");
+    }
+  </script>  
+  </body>
 </html>
